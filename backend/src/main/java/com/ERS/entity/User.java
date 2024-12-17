@@ -1,5 +1,12 @@
+
+
+
+
 public class User {
     
+    @Column(name = "userId")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;    
 
     private String firstName;
