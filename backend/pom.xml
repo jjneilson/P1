@@ -8,11 +8,11 @@
 		<version>3.4.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.johnneilson</groupId>
-	<artifactId>P1</artifactId>
+	<groupId>com.ERS</groupId>
+	<artifactId>EmploymentReinbursmentSystem</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>P1</name>
-	<description>P1 with SpringBoot</description>
+	<name>EmploymentReinbursmentSystem</name>
+	<description>EmploymentReinbursmentSystem API with SpringBoot</description>
 	<url/>
 	<licenses>
 		<license/>
