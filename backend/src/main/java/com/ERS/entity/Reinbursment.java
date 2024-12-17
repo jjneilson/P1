@@ -9,7 +9,7 @@ public class Reinbursment {
     /**
      * The unique identifier for the reinbursment.
      */
-    @Column(name = "reimb_id")
+    @Column(name = "reimbId")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int reimbId;
