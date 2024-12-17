@@ -1,13 +1,13 @@
-package com.johnneilson.P1;
+package com.ERS;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class P1Application {
+public class EmploymentReinbursmentSystemApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(P1Application.class, args);
+		SpringApplication.run(EmploymentReinbursmentSystemApp.class, args);
 	}
 
 }
