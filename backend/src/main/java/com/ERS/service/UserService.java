@@ -40,4 +40,9 @@ public class UserService {
         }
         return null;
     }
+
+    public Object getUsers() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUsers'");
+    }
 }
