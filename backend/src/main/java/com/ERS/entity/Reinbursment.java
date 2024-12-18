@@ -1,17 +1,13 @@
+package com.ERS.entity;
 
 
 
 
-@Entity
-@Table(name = "reinbursment")
 public class Reinbursment {
     
     /**
      * The unique identifier for the reinbursment.
      */
-    @Column(name = "reimbId")
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int reimbId;
 
     /**
@@ -50,11 +46,20 @@ public class Reinbursment {
      * @param userId The ID of the user associated with the reimbursement.
      */
 
-    public Reinbursment(String description, int amount, String status, int userId) {
+    public Reinbursment(int reimbId,String description, int amount, String status, int userId) {
+        this.reimbId = reimbId;
         this.description = description;
         this.amount = amount;
         this.status = status;
         this.userId = userId;
+    }
+
+    public int getReimbId() {
+        return reimbId;
+    }
+
+    public void setReimbId(int reimbId) {
+        this.reimbId = reimbId;
     }
 
     public String getDescription() {
