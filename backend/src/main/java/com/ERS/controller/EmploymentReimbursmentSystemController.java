@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.ERS.entity.Reimbursment;
 import com.ERS.entity.User;
+import com.ERS.service.JwtService;
 import com.ERS.service.ReimbursmentService;
 import com.ERS.service.UserService;
 
@@ -22,8 +24,10 @@ public class EmploymentReimbursmentSystemController {
     
     @Autowired
     UserService userService;
+    @Autowired
     ReimbursmentService reimbursmentService;
-
+    @Autowired
+    JwtService jwtService;
 
     @Autowired
     public EmploymentReimbursmentSystemController(UserService userService, ReimbursmentService reimbursmentService){
@@ -37,24 +41,33 @@ public class EmploymentReimbursmentSystemController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity getAllUsers(){
-        return ResponseEntity.status(200).body(userService.getAllUsers());
+    public ResponseEntity getAllUsers(@RequestHeader("Authorization") String token){
+        if(jwtService.decodeToken(token).getRole().equals("manager")){
+            return ResponseEntity.status(200).body(userService.getAllUsers());
+        }
+        return ResponseEntity.status(401).body("Unauthorized");
     }
 
     @GetMapping("/reimbursements")
-    public ResponseEntity getAllReimbursments(){
-        return ResponseEntity.status(200).body(reimbursmentService.getAllReimbursments());
+    public ResponseEntity getAllReimbursments(@RequestHeader("Authorization") String token){
+        if(jwtService.decodeToken(token).getRole().equals("manager")){
+            return ResponseEntity.status(200).body(reimbursmentService.getAllReimbursments());
+        }
+        return ResponseEntity.status(401).body("Unauthorized");
     }
 
-    @PatchMapping("/reimbursements/{reimbursmentid}")
-    public ResponseEntity updateReimbursment(@PathVariable int reimbursmentid, @RequestBody Reimbursment updatedReimbursment){
-        Optional<Object> response = Optional.ofNullable(reimbursmentService.updateReimbursment(reimbursmentid, updatedReimbursment));
-        if(response.isPresent()){
-            return ResponseEntity.status(200).body(response);
-        }
-        else {
-            return ResponseEntity.status(400).body("Reimbursment change not resolved");
-        }
+    @PatchMapping("/reimbursements/resolve/{reimbursmentid}")
+    public ResponseEntity resolveReimbursment(@RequestHeader("Authorization") String token,@PathVariable int reimbursmentid, @RequestBody Reimbursment updatedReimbursment){
+        if(jwtService.decodeToken(token).equals("manager") ){
+            Optional<Object> response = Optional.ofNullable(reimbursmentService.updateReimbursment(reimbursmentid, updatedReimbursment));
+            if(response.isPresent()){
+                return ResponseEntity.status(200).body(response);
+            }
+            else {
+                return ResponseEntity.status(409).body("Reimbursment change not resolved");
+            }
+        } 
+        return ResponseEntity.status(401).body("Unauthorized");
     }
 
     @PostMapping("/register")
@@ -74,14 +87,17 @@ public class EmploymentReimbursmentSystemController {
     }
 
     @PostMapping("/createreimbursement")
-    public ResponseEntity createReimbursment(@RequestBody Reimbursment newReimbursment){
-        Optional<Object> response = Optional.ofNullable(reimbursmentService.createReimbursment(newReimbursment));
-        if(response.isPresent()){
-            return ResponseEntity.status(200).body(response);
+    public ResponseEntity createReimbursment(@RequestHeader("Authorization") String token, @RequestBody Reimbursment newReimbursment){
+        if(jwtService.decodeToken(token) != null){
+            Optional<Object> response = Optional.ofNullable(reimbursmentService.createReimbursment(newReimbursment));
+            if(response.isPresent()){
+             return ResponseEntity.status(200).body(response);
+            }
+            else {
+                return ResponseEntity.status(400).body("Reimbursment not created");
+            }
         }
-        else {
-            return ResponseEntity.status(400).body("Reimbursment not created");
-        }
+        return ResponseEntity.status(440).body("Session Expired");
     }
 
     @PostMapping("/login")
@@ -90,7 +106,8 @@ public class EmploymentReimbursmentSystemController {
         if(response!=null){
             User loggedin = (User) userService.loginUser(response,user);
             if(loggedin!=null){
-                return ResponseEntity.status(200).body(response);
+                String token = jwtService.generateToken(loggedin);
+                return ResponseEntity.status(200).header("Authorization", token).body(response);
             }
             else {
                 return ResponseEntity.status(400).body("Incorrect password");
