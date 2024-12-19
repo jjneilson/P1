@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,7 +69,7 @@ public class EmploymentReimbursmentSystemController {
             }
         }
         else {
-            return ResponseEntity.status(400).body("Username already exists");
+            return ResponseEntity.status(409).body("Username already exists");
         }
     }
 
@@ -83,12 +84,12 @@ public class EmploymentReimbursmentSystemController {
         }
     }
 
-    /* 
     @PostMapping("/login")
     public ResponseEntity loginUser(@RequestBody User user){
         User response = (User) userService.findByUsername(user.getUsername());
         if(response!=null){
-            if(response.getPassword().equals(user.getPassword())){
+            User loggedin = (User) userService.loginUser(response,user);
+            if(loggedin!=null){
                 return ResponseEntity.status(200).body(response);
             }
             else {
@@ -99,6 +100,5 @@ public class EmploymentReimbursmentSystemController {
             return ResponseEntity.status(400).body("User not found");
         }
     }
-    */
 
 }

@@ -5,6 +5,7 @@ package com.ERS.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ERS.entity.User;
@@ -15,10 +16,12 @@ public class UserService {
     
     @Autowired
     private final UserRepository userRepository;
-
+    private BCryptPasswordEncoder crypto;
+    
     @Autowired
     public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
+        this.crypto = new BCryptPasswordEncoder();
     }
 
     public User registerUser(User newUser) {
@@ -28,7 +31,7 @@ public class UserService {
         boolean uname=newUser.getUsername().length()>0;
         boolean pword=newUser.getPassword().length()>8;
         if(fname && lname && uname && pword){
-            //newUser.setPassword(new BCryptPasswordEncoder().encode(newUser.getPassword()));
+            newUser.setPassword(crypto.encode(newUser.getPassword()));
             newUser.setRole("employee");
             return this.userRepository.save(newUser);
         }
@@ -41,6 +44,13 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return this.userRepository.findAll();
+    }
+
+    public User loginUser(User response, User user) {
+        if (crypto.matches(user.getPassword(), response.getPassword())){
+            return response;
+        }
+        return null;
     }
 
 
