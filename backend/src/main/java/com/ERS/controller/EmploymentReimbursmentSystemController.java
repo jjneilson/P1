@@ -36,8 +36,11 @@ public class EmploymentReimbursmentSystemController {
     }
 
     @GetMapping("/users/{userid}/reimbursements")
-    public ResponseEntity getAllReimbursmentsById(@PathVariable int userid){
-        return ResponseEntity.status(200).body(reimbursmentService.getAllReimbursmentsById(userid));
+    public ResponseEntity getAllReimbursmentsById(@RequestHeader("Authorization") String token, @PathVariable int userid){
+        if(jwtService.decodeToken(token) != null){
+            return ResponseEntity.status(200).body(reimbursmentService.getAllReimbursmentsById(userid));
+        }
+        return ResponseEntity.status(440).body("Session Expired");
     }
 
     @GetMapping("/users")
@@ -58,7 +61,7 @@ public class EmploymentReimbursmentSystemController {
 
     @PatchMapping("/reimbursements/resolve/{reimbursmentid}")
     public ResponseEntity resolveReimbursment(@RequestHeader("Authorization") String token,@PathVariable int reimbursmentid, @RequestBody Reimbursment updatedReimbursment){
-        if(jwtService.decodeToken(token).equals("manager") ){
+        if(jwtService.decodeToken(token).getRole().equals("manager")){
             Optional<Object> response = Optional.ofNullable(reimbursmentService.updateReimbursment(reimbursmentid, updatedReimbursment));
             if(response.isPresent()){
                 return ResponseEntity.status(200).body(response);

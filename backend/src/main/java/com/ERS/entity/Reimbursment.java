@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,8 +16,9 @@ public class Reimbursment {
      * The unique identifier for the reinbursment.
      */
     @Column(name = "reimb_id")
-    @Id 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @SequenceGenerator(name = "reimbursment_seq",sequenceName = "reimbursment_seq",allocationSize = 1)
+    @GeneratedValue(generator = "reimbursment_seq",strategy = GenerationType.SEQUENCE)
     private int reimbid;
 
     /*

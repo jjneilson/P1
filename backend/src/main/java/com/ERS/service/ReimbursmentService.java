@@ -27,13 +27,12 @@ public class ReimbursmentService {
         return this.reimbursmentRepository.findByuserid(userid);
     }
 
-    public Object createReimbursment(Reimbursment newReinbursment) {
-        boolean amount = newReinbursment.getAmount()!=0;
-        boolean userid = newReinbursment.getuserid()!=0;
-        boolean status = newReinbursment.getStatus().equals("pending");
+    public Object createReimbursment(Reimbursment newReimbursment) {
+        boolean amount = newReimbursment.getAmount()!=0;
+        boolean userid = newReimbursment.getuserid()!=0;
+        boolean status = newReimbursment.getStatus().equals("pending");
         if (amount && userid && status) {
-            System.out.println("Creating new reinbursment");
-            return this.reimbursmentRepository.save(newReinbursment);
+            return this.reimbursmentRepository.save(newReimbursment);
         }
         return null;
     }
