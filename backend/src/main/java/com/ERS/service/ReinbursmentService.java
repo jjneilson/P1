@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ERS.repository.ReinbursmentRepository;
 import com.ERS.entity.Reinbursment;
+import com.ERS.repository.ReinbursmentRepository;
 
 @Service
 public class ReinbursmentService {
@@ -19,21 +19,9 @@ public class ReinbursmentService {
         this.reinbursmentRepository = reinbursmentRepository;
     }
 
-    public List<Reinbursment> findByPostedBy(int postedBy){
-        return this.reinbursmentRepository.findByPostedBy(postedBy);
+    public List<Reinbursment> getAllReimbursments() {
+        return this.reinbursmentRepository.findAll();
     }
 
-    public Reinbursment findByReinbursmentId(int reinbursmentId){
-        return this.reinbursmentRepository.findByReinbursmentId(reinbursmentId);
-    }
 
-    public void updateByReinbursmentId(int reinbursmentId, String status) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateByReinbursmentId'");
-    }
-
-    public Object getReinbursments() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getReinbursments'");
-    }
 }
