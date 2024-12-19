@@ -8,16 +8,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "reinbursment")
-public class Reinbursment {
+@Table(name = "reimbursment")
+public class Reimbursment {
     
     /*
      * The unique identifier for the reinbursment.
      */
-    @Column(name = "reimbursmentid")
-    @Id
+    @Column(name = "reimb_id")
+    @Id 
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int reimbursmentid;
+    private int reimbid;
 
     /*
      * A brief description of the reimbursement.
@@ -47,7 +47,7 @@ public class Reinbursment {
      * Default constructor for the Reinbursment class.
      * Initializes a new instance of the Reinbursment class.
      */
-    public Reinbursment() {
+    public Reimbursment() {
     }
 
     /*
@@ -59,8 +59,8 @@ public class Reinbursment {
      * @param userid The ID of the user associated with the reimbursement.
      */
 
-    public Reinbursment(int reimbursmentid,String description, int amount, String status, int userid) {
-        this.reimbursmentid = reimbursmentid;
+    public Reimbursment(int reimbursmentid,String description, int amount, String status, int userid) {
+        this.reimbid = reimbursmentid;
         this.description = description;
         this.amount = amount;
         this.status = status;
@@ -68,11 +68,11 @@ public class Reinbursment {
     }
 
     public int getreimbursmentid() {
-        return reimbursmentid;
+        return reimbid;
     }
 
     public void setreimbursmentid(int reimbursmentid) {
-        this.reimbursmentid = reimbursmentid;
+        this.reimbid = reimbursmentid;
     }
 
     public String getDescription() {

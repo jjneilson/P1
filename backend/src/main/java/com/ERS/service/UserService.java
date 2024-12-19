@@ -1,6 +1,6 @@
 package com.ERS.service;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
@@ -28,12 +28,11 @@ public class UserService {
         boolean uname=newUser.getUsername().length()>0;
         boolean pword=newUser.getPassword().length()>8;
         if(fname && lname && uname && pword){
-            newUser.setPassword(new BCryptPasswordEncoder().encode(newUser.getPassword()));
-            newUser.setRole("Employee");
+            //newUser.setPassword(new BCryptPasswordEncoder().encode(newUser.getPassword()));
+            newUser.setRole("employee");
             return this.userRepository.save(newUser);
         }
         return null;
-
     }
 
     public Object findByUsername(String username) {
@@ -43,6 +42,7 @@ public class UserService {
     public List<User> getAllUsers() {
         return this.userRepository.findAll();
     }
+
 
 
 }
