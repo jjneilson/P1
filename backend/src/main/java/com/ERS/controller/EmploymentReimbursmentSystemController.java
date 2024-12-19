@@ -101,10 +101,4 @@ public class EmploymentReimbursmentSystemController {
     }
     */
 
-    //post security testing
-    @PostMapping("/test")
-    public ResponseEntity test(){
-        return ResponseEntity.status(200).body("Test");
-    }
-
 }
