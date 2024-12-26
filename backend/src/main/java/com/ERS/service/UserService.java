@@ -1,6 +1,7 @@
 package com.ERS.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,7 +37,7 @@ public class UserService {
         return null;
     }
 
-    public Object findByUsername(String username) {
+    public User findByUsername(String username) {
         return this.userRepository.findByusername(username);
     }
 
@@ -47,6 +48,15 @@ public class UserService {
     public User loginUser(User response, User user) {
         if (crypto.matches(user.getPassword(), response.getPassword())){
             return response;
+        }
+        return null;
+    }
+
+    public User changeUserRole(int userid, User user) {
+        Optional<User> response = Optional.ofNullable(this.userRepository.findByuserid(userid));
+        if (response.isPresent()) {
+            response.get().setRole(user.getRole());
+            return this.userRepository.save(response.get());
         }
         return null;
     }
