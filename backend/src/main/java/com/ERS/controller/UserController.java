@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -94,4 +95,15 @@ public class UserController {
         }
     }
 
+    @DeleteMapping("/users/delete/{userid}")
+    public ResponseEntity deleteUser(@RequestHeader("Authorization") String token, @PathVariable int userid){
+        if(jwtService.decodeToken(token).getRole().equals("manager")){
+            Optional<User> response = Optional.ofNullable(userService.deleteUser(userid));
+            if(response.isPresent()){
+                return ResponseEntity.status(200).body(response);
+            }
+            return ResponseEntity.status(409).body("User not found.");
+        }
+        return ResponseEntity.status(401).body("Unauthorized");
+    }
 }

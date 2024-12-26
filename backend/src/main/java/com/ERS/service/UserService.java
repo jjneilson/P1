@@ -61,6 +61,15 @@ public class UserService {
         return null;
     }
 
+    public User deleteUser(int userid) {
+        Optional<User> response = Optional.ofNullable(this.userRepository.findByuserid(userid));
+        if(response.isPresent()){
+            this.userRepository.delete(response.get());
+            return response.get();
+        }
+        return null;
+    }
+
 
 
 }
