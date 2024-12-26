@@ -23,7 +23,7 @@ public class ReimbursmentService {
         return this.reimbursmentRepository.findAll();
     }
 
-    public Object getAllReimbursmentsById(int userid) {
+    public List<Reimbursment> getAllReimbursmentsById(int userid) {
         return this.reimbursmentRepository.findByuserid(userid);
     }
 
