@@ -40,7 +40,7 @@ public class ReimbursmentService {
     public Object updateReimbursment(int reimbursmentid, Reimbursment updatedReimbursment) {
         boolean idcheck = this.reimbursmentRepository.findByreimbid(reimbursmentid)!=null;
         if (idcheck) {
-            updatedReimbursment.setreimbursmentid(reimbursmentid);
+            updatedReimbursment.setStatus(updatedReimbursment.getStatus());
             return this.reimbursmentRepository.save(updatedReimbursment);
         }
         return null;
