@@ -90,7 +90,9 @@ public class EmploymentReimbursmentSystemController {
 
     @PostMapping("/createreimbursement")
     public ResponseEntity createReimbursment(@RequestHeader("Authorization") String token, @RequestBody Reimbursment newReimbursment){
-        if(jwtService.decodeToken(token) != null){
+        User jwt = jwtService.decodeToken(token);
+        if(jwt != null){
+            newReimbursment.setuserid(jwt.getuserid());
             Optional<Object> response = Optional.ofNullable(reimbursmentService.createReimbursment(newReimbursment));
             if(response.isPresent()){
              return ResponseEntity.status(200).body(response);
