@@ -61,7 +61,7 @@ public class UserController {
         return ResponseEntity.status(401).body("Unauthorized");
     }
 
-    @PostMapping("/users/register")
+    @PostMapping("/auth/register")
     public ResponseEntity registerUser(@RequestBody User newUser){ 
         if ((User) userService.findByUsername(newUser.getUsername())==null) {
             Optional<User> response = Optional.ofNullable(userService.registerUser(newUser));
@@ -77,7 +77,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/users/login")
+    @PostMapping("/auth/login")
     public ResponseEntity loginUser(@RequestBody User user){
         User response = (User) userService.findByUsername(user.getUsername());
         if(response!=null){
