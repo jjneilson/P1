@@ -7,13 +7,13 @@ export const registerFormSchema = z.object({
     })
     .min(1, "Please enter a valid email address.")
     .max(50),
-  firstName: z
+  firstname: z
     .string({
       message: "Please enter your first name.",
     })
     .min(1, "Please enter your first name.")
     .max(50),
-  lastName: z
+  lastname: z
     .string({
       message: "Please enter your last name.",
     })
