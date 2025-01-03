@@ -49,6 +49,14 @@ public class UserController {
         return ResponseEntity.status(401).body("Unauthorized");
     }
 
+    @GetMapping("/auth/me")
+    public ResponseEntity checkauth(@RequestHeader("Authorization") String token){
+        if(jwtService.decodeToken(token) != null){
+            return ResponseEntity.status(200).body(jwtService.decodeToken(token));
+        }
+        return ResponseEntity.status(401).body("Unauthorized");
+    }
+
     @PatchMapping("/users/{userid}/role")
     public ResponseEntity changeUserRole(@RequestHeader("Authorization") String token, @PathVariable int userid, @RequestBody User user){
         if(jwtService.decodeToken(token).getRole().equals("manager")){
