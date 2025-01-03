@@ -6,7 +6,7 @@ export const Route = createRootRoute({
   component: () => (
     <QueryProvider>
       <div>
-        <Outlet />
+        <Outlet ></Outlet>
         <Toaster />
       </div>
     </QueryProvider>
