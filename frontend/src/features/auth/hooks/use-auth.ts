@@ -9,7 +9,11 @@ export function useAuth(): UseQueryResult<{ email: string }> {
     queryKey: ["auth"],
     queryFn: async () => {
       try {
-        const resp = await axiosInstance.get("/auth/me");
+        const resp = await axiosInstance.get("/auth/me", {
+          headers: {
+            Authorization: localStorage.getItem("token")
+          }
+        });
         return resp.data;
       } catch (e) {
         console.error(e);

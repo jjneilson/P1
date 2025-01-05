@@ -17,6 +17,7 @@ public class WebConfig {
                         .allowedOrigins("http://localhost:5173") // Allow requests from your frontend
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allow HTTP methods
                         .allowedHeaders("*") // Allow all headers
+                        .exposedHeaders("Authorization") // Expose the 'Authorization' header
                         .allowCredentials(true); // Allow credentials (if needed)
             }
         };
