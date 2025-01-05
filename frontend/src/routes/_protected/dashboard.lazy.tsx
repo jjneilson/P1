@@ -1,3 +1,4 @@
+import { ReinbursmentTable } from '@/features/auth/reinbursments/components/all-reinbursment-table'
 import { createLazyFileRoute } from '@tanstack/react-router'
 
 export const Route = createLazyFileRoute('/_protected/dashboard')({
@@ -5,5 +6,9 @@ export const Route = createLazyFileRoute('/_protected/dashboard')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/protected/dashboard"!</div>
+  return (
+    <div>
+      <ReinbursmentTable></ReinbursmentTable>
+    </div>
+    );
 }
