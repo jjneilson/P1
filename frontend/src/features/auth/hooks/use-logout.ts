@@ -7,7 +7,12 @@ export function useLogout() {
 
   return useMutation({
     mutationFn: async () => {
-      const resp = await axiosInstance.post("/auth/logout");
+      const resp = await axiosInstance.post("/auth/logout",{},{
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
+      localStorage.removeItem("token");
       return resp.data;
     },
     onSuccess: () => {

@@ -2,7 +2,7 @@ import { axiosInstance } from "@/lib/axios-config";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 
-export function useAuth(): UseQueryResult<{ email: string }> {
+export function useAuth(): UseQueryResult<{ userid:number, username:string, password:string, firstname:string, lastname:string, role:string } | null> {
   const router = useRouter();
 
   return useQuery({
