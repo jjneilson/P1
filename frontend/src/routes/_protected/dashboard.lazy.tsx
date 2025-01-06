@@ -27,7 +27,7 @@ function DashboardHeader() {
     <>
       <div className="flex flex-col gap-y-5">
         <h1 className="text-2xl font-bold">Employee Dashboard</h1>
-        <Button className="w-fit" onClick={() => setOpen(true)}>
+        <Button className="w-fit bg-black" onClick={() => setOpen(true)}>
           <Plus />
           Create Reimbursment
         </Button>

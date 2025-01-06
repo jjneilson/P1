@@ -19,10 +19,10 @@ import {
           if (onChange) onChange(value);
         }}
       >
-        <SelectTrigger className="w-full bg-gray-700 text-gray-100 rounded-lg border border-gray-600">
+        <SelectTrigger className="w-full bg-black text-gray-100 rounded-lg border border-gray-600">
           <SelectValue placeholder="Select status" />
         </SelectTrigger>
-        <SelectContent className="bg-gray-700 text-gray-100">
+        <SelectContent className="bg-black text-gray-100">
           <SelectItem value="Pending">Pending</SelectItem>
           <SelectItem value="Approved">Approved</SelectItem>
           <SelectItem value="Denied">Denied</SelectItem>
