@@ -1,4 +1,4 @@
-import { ReinbursmentTable } from '@/features/auth/reinbursments/components/all-reinbursment-table'
+import { ReinbursmentTable } from '@/features/reinbursments/components/reinbursment-table'
 import { createLazyFileRoute } from '@tanstack/react-router'
 
 export const Route = createLazyFileRoute('/_protected/dashboard')({

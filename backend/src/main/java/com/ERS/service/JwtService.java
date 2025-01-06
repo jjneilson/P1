@@ -51,7 +51,7 @@ public class JwtService {
                 .parseClaimsJws(token)
                 .getBody();
 
-        return new User(claims.get("id", Integer.class), claims.get("username", String.class), claims.get("password",String.class), claims.get("firstname", String.class), claims.get("lastname", String.class), claims.get("role", String.class));
+        return new User(claims.get("id", Integer.class), claims.get("firstname", String.class), claims.get("lastname", String.class), claims.get("username", String.class), claims.get("password",String.class),  claims.get("role", String.class));
     }
 
     private Key getSigningKey() {

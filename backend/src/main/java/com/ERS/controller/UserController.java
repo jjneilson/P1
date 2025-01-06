@@ -33,14 +33,6 @@ public class UserController {
         this.reimbursmentService = reimbursmentService;
     }
 
-    @GetMapping("/users/{userid}/reimbursements")
-    public ResponseEntity getAllReimbursmentsById(@RequestHeader("Authorization") String token, @PathVariable int userid){
-        if(jwtService.decodeToken(token) != null){
-            return ResponseEntity.status(200).body(reimbursmentService.getAllReimbursmentsById(userid));
-        }
-        return ResponseEntity.status(401).body("Unauthorized");
-    }
-
     @GetMapping("/users")
     public ResponseEntity getAllUsers(@RequestHeader("Authorization") String token){
         if(jwtService.decodeToken(token).getRole().equals("manager")){
@@ -65,6 +57,14 @@ public class UserController {
                 return ResponseEntity.status(200).body(response);
             }
             return ResponseEntity.status(409).body("User not found.");
+        }
+        return ResponseEntity.status(401).body("Unauthorized");
+    }
+
+    @PostMapping("/auth/logout")
+    public ResponseEntity logoutUser(@RequestHeader("Authorization") String token){
+        if(jwtService.decodeToken(token) != null){
+            return ResponseEntity.status(200).body("Logged out");
         }
         return ResponseEntity.status(401).body("Unauthorized");
     }

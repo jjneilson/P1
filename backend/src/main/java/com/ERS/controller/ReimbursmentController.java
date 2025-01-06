@@ -42,6 +42,14 @@ public class ReimbursmentController {
         return ResponseEntity.status(401).body("Unauthorized");
     }
 
+    @GetMapping("/reimbursements/me")
+    public ResponseEntity getAllReimbursmentsById(@RequestHeader("Authorization") String token){
+        if(jwtService.decodeToken(token) != null){
+            return ResponseEntity.status(200).body(reimbursmentService.getAllReimbursmentsById(jwtService.decodeToken(token).getuserid()));
+        }
+        return ResponseEntity.status(401).body("Unauthorized");
+    }
+
     @PatchMapping("/reimbursements/resolve/{reimbursmentid}")
     public ResponseEntity resolveReimbursment(@RequestHeader("Authorization") String token,@PathVariable int reimbursmentid, @RequestBody Reimbursment updatedReimbursment){
         if(jwtService.decodeToken(token).getRole().equals("manager")){
