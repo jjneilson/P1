@@ -41,6 +41,10 @@ This is a web application made to simplify the process of requesting a reimbursm
   3. Managers log in to review and take action (approve/deny or delete) on the reimbursements.
   4. Users can log in and check the real-time status of their reimbursement requests.
 
+- **ERD**:
+  
+  ![image](https://drive.google.com/uc?export=view&id=1dxlCZ6-cbXwdNL_8eLVQ_pJvOM4YzaKN)
+
 ### Challenges and Knowledge Gained
 
 #### Challenges

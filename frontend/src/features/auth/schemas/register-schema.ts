@@ -3,9 +3,9 @@ import { z } from "zod";
 export const registerFormSchema = z.object({
   username: z
     .string({
-      message: "Please enter a valid email address.",
+      message: "Please enter a valid username.",
     })
-    .min(1, "Please enter a valid email address.")
+    .min(1, "Please enter a valid username.")
     .max(50),
   firstname: z
     .string({
