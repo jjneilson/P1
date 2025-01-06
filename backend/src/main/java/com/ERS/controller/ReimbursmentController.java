@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -94,5 +95,19 @@ public class ReimbursmentController {
             }
         }
         return ResponseEntity.status(440).body("Session Expired");
+    }
+
+    @DeleteMapping("/reimbursements/delete/{reimbursmentid}")
+    public ResponseEntity deleteReimbursment(@RequestHeader("Authorization") String token, @PathVariable int reimbursmentid){
+        if(jwtService.decodeToken(token).getRole().equalsIgnoreCase("manager")){
+            Optional<Object> response = Optional.ofNullable(reimbursmentService.deleteReimbursment(reimbursmentid));
+            if(response.isPresent()){
+                return ResponseEntity.status(200).body(response);
+            }
+            else {
+                return ResponseEntity.status(409).body("Reimbursment not deleted");
+            }
+        } 
+        return ResponseEntity.status(401).body("Unauthorized");
     }
 }

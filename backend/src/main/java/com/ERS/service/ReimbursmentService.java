@@ -53,5 +53,14 @@ public class ReimbursmentService {
         return null;
     }
 
+    public Object deleteReimbursment(int reimbursmentid) {
+        boolean idcheck = this.reimbursmentRepository.findByreimbid(reimbursmentid)!=null;
+        if (idcheck) {
+            this.reimbursmentRepository.deleteById((long) reimbursmentid);
+            return "Reimbursment with id "+reimbursmentid+" deleted";
+        }
+        return null;
+    }
+
 
 }
