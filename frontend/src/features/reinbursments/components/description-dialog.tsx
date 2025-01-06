@@ -44,7 +44,7 @@ import {
     return (
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="bg-blue-500 text-white hover:bg-blue-600">
+          <Button className="bg-black text-white hover:bg-slate">
             Edit Description
           </Button>
         </DialogTrigger>

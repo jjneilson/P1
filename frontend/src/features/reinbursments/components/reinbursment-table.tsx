@@ -2,6 +2,7 @@ import { Table,TableCaption, TableHeader, TableRow, TableHead, TableBody, TableC
 
 import { useReinbursmentTable } from "../hooks/useReinbursmentTable";
 import { DescriptionDialog } from "./description-dialog.tsx";
+import { Button } from "@/components/ui/button.tsx";
 
 
 export function ReinbursmentTable() {

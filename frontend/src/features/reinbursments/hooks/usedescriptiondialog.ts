@@ -12,7 +12,7 @@ export function useDescriptionDialog(){
 
     return useMutation({
         mutationFn: async ({ reimbursmentid, newDescription }: UpdateDescriptionProps) => {
-            const resp = await axiosInstance.patch(`/reimbursements/update/${reimbursmentid}`, {
+            const resp = await axiosInstance.patch('/reimbursements/update/${reimbursmentid}', {
               description: newDescription,
               },{
                 headers: {

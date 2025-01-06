@@ -84,6 +84,7 @@ public class ReimbursmentController {
         User jwt = jwtService.decodeToken(token);
         if(jwt != null){
             newReimbursment.setuserid(jwt.getuserid());
+            newReimbursment.setStatus("Pending");
             Optional<Object> response = Optional.ofNullable(reimbursmentService.createReimbursment(newReimbursment));
             if(response.isPresent()){
              return ResponseEntity.status(200).body(response);

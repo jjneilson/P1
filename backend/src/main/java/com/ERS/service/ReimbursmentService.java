@@ -30,7 +30,8 @@ public class ReimbursmentService {
     public Object createReimbursment(Reimbursment newReimbursment) {
         boolean amount = newReimbursment.getAmount()!=0;
         boolean userid = newReimbursment.getuserid()!=0;
-        boolean status = newReimbursment.getStatus().equals("pending");
+        boolean status = newReimbursment.getStatus().equalsIgnoreCase("pending");
+        System.out.println(amount +" "+ userid +" "+ status);
         if (amount && userid && status) {
             return this.reimbursmentRepository.save(newReimbursment);
         }
