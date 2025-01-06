@@ -2,14 +2,23 @@ import { Table, TableCaption, TableHeader, TableRow, TableHead, TableBody, Table
 import { useUserTable } from "../hooks/useusertable";
 import { userRoleUpdate } from "../hooks/userroleupdate";
 import { RoleSelect } from "./role";
-
+import { useDeleteUser } from "../hooks/usedeleteuser";
 
 
 
 export function UserTable() {
-    const { data, error } = useUserTable();
+    const { data, error, isLoading } = useUserTable();
     const updateRole = userRoleUpdate();
+    const deleteUser = useDeleteUser();
 
+    function handleDelete(reimbId: number) {
+    if (window.confirm("Are you sure you want to delete this reimbursement?")) {
+        deleteUser.mutate(reimbId);
+      }
+    }
+
+    if (isLoading) return <div>Loading...</div>;
+    
     if (!data || data.length === 0) {
         return <div>No users found.</div>;
     }
@@ -48,6 +57,15 @@ export function UserTable() {
                     newRole,
                   })}/>
                     </TableCell>
+                    <TableCell className="text-right">
+              <button
+                onClick={() => handleDelete(user.userid)}
+                className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                disabled={isLoading}
+              >
+                {isLoading ? "Deleting..." : "Delete"}
+              </button>
+            </TableCell>
 
                 </TableRow>
             ))}

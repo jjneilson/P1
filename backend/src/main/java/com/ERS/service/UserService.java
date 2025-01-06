@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ERS.entity.Reimbursment;
 import com.ERS.entity.User;
 import com.ERS.repository.UserRepository;
 
@@ -15,11 +16,13 @@ public class UserService {
     
     @Autowired
     private final UserRepository userRepository;
+    private final ReimbursmentService reimbursmentService;
     private BCryptPasswordEncoder crypto;
     
     @Autowired
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository, ReimbursmentService reimbursmentService){
         this.userRepository = userRepository;
+        this.reimbursmentService = reimbursmentService;
         this.crypto = new BCryptPasswordEncoder();
     }
 
@@ -65,6 +68,9 @@ public class UserService {
     public User deleteUser(int userid) {
         Optional<User> response = Optional.ofNullable(this.userRepository.findByuserid(userid));
         if(response.isPresent()){
+            for (Reimbursment curr:this.reimbursmentService.getAllReimbursmentsById(userid)){
+                this.reimbursmentService.deleteReimbursment(curr.getreimbursmentid());
+            }
             this.userRepository.delete(response.get());
             return response.get();
         }
