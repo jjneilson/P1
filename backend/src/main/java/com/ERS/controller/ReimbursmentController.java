@@ -67,7 +67,7 @@ public class ReimbursmentController {
 
     @PatchMapping("/reimbursements/update/{reimbursmentid}")
     public ResponseEntity changeReimbursment(@RequestHeader("Authorization") String token,@PathVariable int reimbursmentid, @RequestBody Reimbursment updatedReimbursment){
-        if(jwtService.decodeToken(token).getRole().equals("employee")){
+        if(jwtService.decodeToken(token).getRole().equals("employee")||jwtService.decodeToken(token).getRole().equals("manager")){
             Optional<Object> response = Optional.ofNullable(reimbursmentService.updateReimbursment(reimbursmentid, updatedReimbursment));
             if(response.isPresent()){
                 return ResponseEntity.status(200).body(response);
