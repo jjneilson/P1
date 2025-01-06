@@ -64,6 +64,20 @@ public class ReimbursmentController {
         return ResponseEntity.status(401).body("Unauthorized");
     }
 
+    @PatchMapping("/reimbursements/update/{reimbursmentid}")
+    public ResponseEntity changeReimbursment(@RequestHeader("Authorization") String token,@PathVariable int reimbursmentid, @RequestBody Reimbursment updatedReimbursment){
+        if(jwtService.decodeToken(token).getRole().equals("employee")){
+            Optional<Object> response = Optional.ofNullable(reimbursmentService.updateReimbursment(reimbursmentid, updatedReimbursment));
+            if(response.isPresent()){
+                return ResponseEntity.status(200).body(response);
+            }
+            else {
+                return ResponseEntity.status(409).body("Reimbursment change not resolved");
+            }
+        } 
+        return ResponseEntity.status(401).body("Unauthorized");
+    }
+
 
     @PostMapping("/reimbursements/create")
     public ResponseEntity createReimbursment(@RequestHeader("Authorization") String token, @RequestBody Reimbursment newReimbursment){

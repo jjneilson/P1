@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const reimbursementListSchema = z.array(
   z.object({
-    reimb_id: z.number(), 
+    reimbursmentid: z.number(), 
     description: z.string().nullable(),
     amount: z.number(),
     status: z.string(), 

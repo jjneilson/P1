@@ -1,6 +1,7 @@
 import { Table,TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 
 import { useReinbursmentTable } from "../hooks/useReinbursmentTable";
+import { DescriptionDialog } from "./description-dialog.tsx";
 
 
 export function ReinbursmentTable() {
@@ -23,21 +24,25 @@ return (
           <TableHead>Status</TableHead>
           <TableHead>Description</TableHead>
           <TableHead>Update Description</TableHead>
-          <TableHead>User</TableHead>
+          <TableHead>User ID</TableHead>
           <TableHead className="text-right">Amount</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {data.map((reimbursement) => (
-          <TableRow key={reimbursement.reimbId}>
+          <TableRow key={reimbursement.reimbursmentid}>
             <TableCell className="font-medium">
-              {reimbursement.reimbId}
+              {reimbursement.reimbursmentid}
             </TableCell>
             <TableCell>{reimbursement.status}</TableCell>
             <TableCell>{reimbursement.description}</TableCell>
             <TableCell>
+              <DescriptionDialog
+                reimbursementId={reimbursement.reimbursmentid}
+                currentDescription={reimbursement.description ?? ""}
+              />
             </TableCell>
-            <TableCell>{reimbursement.user.username}</TableCell>
+            <TableCell>{reimbursement.userid}</TableCell>
             <TableCell className="text-right">
               ${reimbursement.amount}
             </TableCell>
