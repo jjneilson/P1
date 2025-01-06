@@ -15,7 +15,7 @@ import { useDeleteReimbursement } from "../hooks/usedeletereimbursement.ts";
 export function AllReimbursementTable() {
   const { data, error, isLoading } = useAllReimbursementTable();
   const updateStatusMutation = useStatusUpdate();
-  const deleteReimbursementMutation = useDeleteReimbursement();
+  const deleteReimbursement = useDeleteReimbursement();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading reimbursements</div>;
@@ -25,7 +25,7 @@ export function AllReimbursementTable() {
 
   const handleDelete = (reimbId: number) => {
     if (window.confirm("Are you sure you want to delete this reimbursement?")) {
-      deleteReimbursementMutation.mutate(reimbId);
+      deleteReimbursement.mutate(reimbId);
     }
   };
 
@@ -43,27 +43,27 @@ export function AllReimbursementTable() {
       </TableHeader>
       <TableBody>
         {data.map((reimbursement) => (
-          <TableRow key={reimbursement.reimbId}>
+          <TableRow key={reimbursement.reimbursmentid}>
             <TableCell className="font-medium">
-              {reimbursement.reimbId}
+              {reimbursement.reimbursmentid}
             </TableCell>
             <TableCell>
               <StatusSelect
                 initialStatus={reimbursement.status}
                 onChange={(newStatus) =>
                   updateStatusMutation.mutate({
-                    reimbId: reimbursement.reimbId, 
+                    reimbursmentid: reimbursement.reimbursmentid, 
                     newStatus,
                   })
                 }
               />
             </TableCell>
             <TableCell>{reimbursement.description}</TableCell>
-            <TableCell>{reimbursement.user.username}</TableCell>
+            <TableCell>{reimbursement.userid}</TableCell>
             <TableCell>${reimbursement.amount}</TableCell>
             <TableCell className="text-right">
               <button
-                onClick={() => handleDelete(reimbursement.reimbId)}
+                onClick={() => handleDelete(reimbursement.reimbursmentid)}
                 className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
                 disabled={isLoading}
               >

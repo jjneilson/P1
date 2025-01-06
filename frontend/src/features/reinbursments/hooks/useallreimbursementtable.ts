@@ -9,7 +9,8 @@ export function useAllReimbursementTable(): UseQueryResult<any[]> {
                 const resp = await axiosInstance.get('/reimbursements', { headers: { Authorization: localStorage.getItem('token') } });
                 return resp.data;
             } catch (e) {
-                console.error
+                console.error(e);
+                return null;
             };
         }
     });

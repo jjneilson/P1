@@ -46,6 +46,7 @@ public class ReimbursmentService {
                 oldReimbursment.setDescription(updatedReimbursment.getDescription());
             }
             else {
+                System.out.println(updatedReimbursment.getStatus());
                 oldReimbursment.setStatus(updatedReimbursment.getStatus());
             }
             return this.reimbursmentRepository.save(oldReimbursment);

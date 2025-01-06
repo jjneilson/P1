@@ -11,9 +11,7 @@ export function useReinbursmentTable() {
           "Authorization": localStorage.getItem("token"),
         },
       });
-      console.log(response.data);
       const data = reimbursementListSchema.parse(response.data);
-
       return data;
     },
   });
