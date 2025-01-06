@@ -1,3 +1,4 @@
+import { AllReimbursementTable } from '@/features/reinbursments/components/all-reinbursment-table'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_protected/reimbursment-dashboard')({
@@ -5,5 +6,5 @@ export const Route = createFileRoute('/_protected/reimbursment-dashboard')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/_protected/reimbursment-dashboard"!</div>
+  return <div><AllReimbursementTable /></div>
 }

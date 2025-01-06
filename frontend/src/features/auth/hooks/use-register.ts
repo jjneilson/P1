@@ -9,6 +9,7 @@ export function useRegister() {
   
   return useMutation({
     mutationFn: async (values: RegisterSchema) => {
+      console.log(values);
       const resp = await axiosInstance.post("/auth/register", values);
       return resp.data;
     },

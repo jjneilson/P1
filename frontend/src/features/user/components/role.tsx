@@ -6,15 +6,15 @@ import {
     SelectValue,
   } from "@/components/ui/select";
 
-  interface StatusSelectProps {
-    initialStatus: string; 
+  interface RoleSelectProps {
+    initialRole: string; 
     onChange?: (value: string) => void; 
   }
   
-  export function StatusSelect({ initialStatus, onChange }: StatusSelectProps) {
+  export function RoleSelect({ initialRole, onChange }: RoleSelectProps) {
     return (
       <Select
-        defaultValue={initialStatus}
+        defaultValue={initialRole}
         onValueChange={(value: string) => {
           if (onChange) onChange(value);
         }}
@@ -23,9 +23,8 @@ import {
           <SelectValue placeholder="Select status" />
         </SelectTrigger>
         <SelectContent className="bg-black text-gray-100">
-          <SelectItem value="Pending">Pending</SelectItem>
-          <SelectItem value="Approved">Approved</SelectItem>
-          <SelectItem value="Denied">Denied</SelectItem>
+          <SelectItem value="manager">Manager</SelectItem>
+          <SelectItem value="employee">Employee</SelectItem>
         </SelectContent>
       </Select>
     );

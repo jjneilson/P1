@@ -1,3 +1,4 @@
+import { UserTable } from '@/features/user/components/user-table'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_protected/user-dashboard')({
@@ -5,5 +6,8 @@ export const Route = createFileRoute('/_protected/user-dashboard')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/_protected/user-dashboard"!</div>
+  return <div>
+    <h1 className="text-2xl font-bold">User Dashboard</h1>
+    <UserTable />
+  </div>
 }

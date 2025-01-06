@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button'
-import { AllReimbursementTable } from '@/features/reinbursments/components/all-reinbursment-table'
 import { CreateReimbursmentDialog } from '@/features/reinbursments/components/create-reimbursment-dialog'
 import { ReinbursmentTable } from '@/features/reinbursments/components/reinbursment-table'
 import { createLazyFileRoute } from '@tanstack/react-router'
@@ -15,7 +14,6 @@ function RouteComponent() {
     <div>
       <DashboardHeader></DashboardHeader>
       <ReinbursmentTable></ReinbursmentTable>
-      <AllReimbursementTable></AllReimbursementTable>
     </div>
   )
 }

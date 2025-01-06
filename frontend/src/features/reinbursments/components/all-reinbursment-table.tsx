@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/table";
 import { useAllReimbursementTable } from "../hooks/useallreimbursementtable.ts";
 import { useStatusUpdate } from "../hooks/usestatusupdate.ts";
-import StatusSelect from "./status";
+import {StatusSelect} from "./status";
 import { useDeleteReimbursement } from "../hooks/usedeletereimbursement.ts";
 
 export function AllReimbursementTable() {
@@ -50,7 +50,7 @@ export function AllReimbursementTable() {
             <TableCell>
               <StatusSelect
                 initialStatus={reimbursement.status}
-                onChange={(newStatus) =>
+                onChange={(newStatus: any) =>
                   updateStatusMutation.mutate({
                     reimbursmentid: reimbursement.reimbursmentid, 
                     newStatus,

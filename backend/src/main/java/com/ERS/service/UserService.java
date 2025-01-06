@@ -28,7 +28,7 @@ public class UserService {
         boolean fname = newUser.getfirstname().length()>0;
         boolean lname = newUser.getlastname().length()>0;
         boolean uname=newUser.getUsername().length()>0;
-        boolean pword=newUser.getPassword().length()>8;
+        boolean pword=newUser.getPassword().length()>=8;
         if(fname && lname && uname && pword){
             newUser.setPassword(crypto.encode(newUser.getPassword()));
             newUser.setRole("employee");
@@ -55,8 +55,9 @@ public class UserService {
     public User changeUserRole(int userid, User user) {
         Optional<User> response = Optional.ofNullable(this.userRepository.findByuserid(userid));
         if (response.isPresent()) {
-            response.get().setRole(user.getRole());
-            return this.userRepository.save(response.get());
+            User resp = response.get();
+            resp.setRole(user.getRole());
+            return this.userRepository.save(resp);
         }
         return null;
     }
